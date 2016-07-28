@@ -3,6 +3,11 @@ import Ember from 'ember'
 export default Ember.Controller.extend({
   socketIOService: Ember.inject.service('socket-io'),
 
+  msg: [],
+  names: '',
+  detail: [],
+  welcome: '',
+
   init: function () {
     this._super.apply(this, arguments)
 
@@ -14,16 +19,52 @@ export default Ember.Controller.extend({
     socket.on('disconnect', function () {
       console.log('Disconnected from Chat Socket')
     })
-    socket.on('chat', function (msg) {
+
+    // using fat arrow function, it will bind the scope of "this" to the physical location
+    socket.on('chat', (msg) => {
       console.log('Received message: ', msg)
-      $('#messages').prepend($('<div class="alert alert-success">').html('<strong>' + msg.message + '</strong> by: ' + msg.name))
+      $('#secondPanel').removeClass('hide')
+
+      this.msg.unshiftObject(msg)
     })
 
-    socket.on('joined', function (user) {
+    socket.on('joined', (user) => {
+      console.log(user.name + ' joined left the chat.')
+      let details = {
+        message: ' ',
+        name: user.name
+      }
+      this.detail.unshiftObject(user)
+      $('#welcome').addClass('hide')
+    // $('#messages').prepend($('<c class="text-center">').html('<strong>' + user.name + '  joined the chat <strong>'))
+    })
 
-  $('#messages').prepend($('<div class="text-center">').html('<strong>' + user.name + ' joined the chat.' + '<strong> '))
-})
+    socket.on('welcome', (msg) => {
+      console.log('Received welcome message: ', msg)
+      $('#welcome').removeClass('hide')
+      this.set('welcome', msg)
+    // enable the form and add welcome message
+    // $('main').removeClass('hidden')
+    //    $('#messages').prepend($('<div class="text-center">').html('<strong>' + msg + '<strong>'))
+    })
 
+    socket.on('online', (connections) => {
+      var names = ''
+      console.log('Connections: ', connections)
+      for (var i = 0; i < connections.length; ++i) {
+        if (connections[i].user) {
+          if (i > 0) {
+            if (i === connections.length) names += ' and '
+            else names += ', '
+          }
+          names += connections[i].user.name
+        }
+      }
+      //  $('#connected').text("Online Users:", names)
+      $('#connected').removeClass('hide')
+      $('#firstPanel').removeClass('hide')
+      this.set('names', names)
+    })
   },
 
   onMessage: function (data) {
@@ -31,10 +72,16 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    submitMessage () {
+    submitMessage() {
       var socket = this.get('socketIOService').socketFor('http://localhost:3000/')
       console.log('Clicked')
-      $('#messages').prepend($('<div class="alert alert-success">').html('<strong>' + this.get('message') + '</strong> by: ' + this.get('name')))
+      let msg = {
+        message: this.get('message'),
+        name: this.get('name')
+      }
+      this.msg.unshiftObject(msg)
+      socket.emit('join', msg)
+      $('#secondPanel').removeClass('hide')
       socket.emit('chat', this.get('message'), this.get('name'))
     }
   }

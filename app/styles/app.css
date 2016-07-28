@@ -1,9 +1,33 @@
 body {
-  background-color: #ECECF6;
+  background-color: rgba(221, 221, 221, 0.12);
   text-align: center;
-  margin-top: 100px;
-
+  margin-top: 50px;
+margin: 30px;
 }
+
 .alert {
-margin: 20px
+margin: 30px;
+border: 1px dotted grey;
+}
+
+#messages{
+  margin-top: 20px;
+}
+#connected{
+  font-weight: bold;
+  color: rgb(66, 190, 131);
+}
+.panel-default{
+  margin-top: 10px;
+  background-color: rgba(221, 221, 221, 0.12) !important;
+}
+
+.panel-body{
+  margin-top: 10px;
+  background-color: rgba(221, 221, 221, 0.12) !important;
+  list-style-type: none; margin: 0; padding: 0;
+}
+
+#firstPanel{
+  padding: 10px;
 }

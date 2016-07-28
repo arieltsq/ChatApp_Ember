@@ -1,13 +1,22 @@
+html {
+  background: url(http://www.twitterevolutions.com/bgs/watercolors.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 body {
-  background-color: rgba(221, 221, 221, 0.12);
+
+  background-color: rgba(221, 221, 221, 0.47);
   text-align: center;
-  margin-top: 50px;
+  margin-top: 80px;
 margin: 30px;
 }
 
 .alert {
 margin: 30px;
-border: 1px dotted grey;
+border: 1px solid rgba(221, 221, 221, 0.67);
 }
 
 #messages{
@@ -15,7 +24,7 @@ border: 1px dotted grey;
 }
 #connected{
   font-weight: bold;
-  color: rgb(66, 190, 131);
+  color: rgb(20, 186, 111);
 }
 .panel-default{
   margin-top: 10px;
@@ -24,7 +33,7 @@ border: 1px dotted grey;
 
 .panel-body{
   margin-top: 10px;
-  background-color: rgba(221, 221, 221, 0.12) !important;
+  background-color: none !important;
   list-style-type: none; margin: 0; padding: 0;
 }
 

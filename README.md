@@ -13,6 +13,15 @@ You will need the following things properly installed on your computer.
 * [Ember CLI](http://ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
 
+## Creating of the App in Terminal  (Starting-up)
+* `ember new chat`
+* `cd chat`
+* `npm init --yes`
+* `ember install ember-websockets`
+* `ember g socket-io`
+* `ember g route chat --pod`
+* `ember s`
+
 ## Installation
 
 * `git clone <repository-url>` this repository
@@ -50,4 +59,3 @@ Specify what it takes to deploy your app.
 * Development Browser Extensions
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
-

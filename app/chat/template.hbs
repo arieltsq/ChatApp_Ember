@@ -41,10 +41,11 @@
     <div id="welcome" class="hide">
       {{welcome}}
     </div>
-    <div id="details">
-      {{#each detail as |d|}}
+    <div id="details" class="hide">
+      <!-- {{#each detail as |d|}}
       <p> User: <strong> {{d.name}} </strong>  have joined </p>
-      {{/each}}
+      {{/each}} -->
+      <p> User: <strong>  {{detail}}</strong>  have joined </p>
     </div>
     <div id="connected" class="hide">
       Online Status: {{names}}
